@@ -9,6 +9,7 @@ void init_board(char **board, int rows, int columns, int mines) {
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
 			board[i][j] = '.'; //empty space
+			board[i][j + columns] = 'n'; // n - not reavealed
 		}
 	}
 
@@ -60,19 +61,39 @@ void calculate_adjancent_mines(char **board, int rows, int columns) {
 }
 
 void print_board(char **board, int rows, int columns) {
-	printf("   ");
+	printf("    ");
 	for(int y = 0; y < columns; y++) {
 		printf("%2d ", y);
+	}
+	printf("\n");
+	printf("   ");
+	for(int y = 0; y < columns; y++) {
+		printf("---");
 	}
 	printf("\n");
 
 	for(int x = 0; x < rows; x++) {
 		printf("%2d ", x);
+		printf("|");
 		for(int y = 0; y < columns; y++) {
-			printf("%2c ", board[x][y]);
+			if(board[x][y + columns] == 'f') {
+				printf("%2c ", 'f');
+			} else if (board[x][y + columns] == 'n') {
+				printf("%2c ", '#');
+			} else if (board[x][y] == '0') {
+				printf("   ");
+			} else {
+				printf("%2c ", board[x][y]);
+			}
 		}
+		printf("|");
 		printf("\n");
 	}
+	printf("   ");
+	for(int y = 0; y < columns; y++) {
+                printf("---");
+	}
+	printf("\n");
 }
 
 

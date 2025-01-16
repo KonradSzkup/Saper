@@ -6,7 +6,7 @@ char **allocate_board(int rows, int columns) {
 	char **board = malloc(rows * sizeof(char *));
 
 	for(int i = 0; i < rows; i++) {
-		board[i] = malloc(columns * sizeof(char));
+		board[i] = malloc(2 * columns * sizeof(char));
 	}
 	return board;
 }
