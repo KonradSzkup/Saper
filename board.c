@@ -3,7 +3,7 @@
 #include <time.h>
 #include "board.h"
 
-void init_board(char **board, int rows, int columns, int mines) {
+void init_board(char **board, int rows, int columns, int mines, int fx, int fy) {
 	
 	//Filing board with empty spaces
 	for(int i = 0; i < rows; i++) {
@@ -14,14 +14,14 @@ void init_board(char **board, int rows, int columns, int mines) {
 	}
 
 	//Placing mines on board
-	place_mines(board, rows, columns, mines);
+	place_mines(board, rows, columns, mines, fx, fy);
 
 	//Calculating how many adjancent mines
 	calculate_adjancent_mines(board, rows, columns);
 
 }
 
-void place_mines(char **board, int rows, int columns, int mines) {
+void place_mines(char **board, int rows, int columns, int mines, int fx, int fy) {
 	
 	//Placing mines in random places on board
 	srand(time(NULL)); 
@@ -30,7 +30,7 @@ void place_mines(char **board, int rows, int columns, int mines) {
 	while(placed_mines < mines) {
 		int x = rand() % rows;
 		int y = rand() % columns;
-		if(board[x][y] != '*') {
+		if(board[x][y] != '*' &&(x != fx && y != fy)) {
 			board[x][y] = '*';
 			placed_mines++;
 		}
@@ -60,7 +60,35 @@ void calculate_adjancent_mines(char **board, int rows, int columns) {
 	}
 }
 
-void print_board(char **board, int rows, int columns) {
+void print_first_board(int rows, int columns) {
+	printf("    ");
+        for(int y = 0; y < columns; y++) {
+                printf("%2d ", y);
+        }
+        printf("\n");
+        printf("   ");
+        for(int y = 0; y < columns; y++) {
+                printf("---");
+        }
+        printf("\n");
+
+        for(int x = 0; x < rows; x++) {
+                printf("%2d ", x);
+                printf("|");
+		for(int y = 0; y < columns; y++) {
+                	printf("%2c ", '#');
+                }
+                printf("|");
+                printf("\n");
+        }
+        printf("   ");
+        for(int y = 0; y < columns; y++) {
+                printf("---");
+        }
+        printf("\n");
+}
+
+void print_board(char **board, int rows, int columns, char mode) {
 	printf("    ");
 	for(int y = 0; y < columns; y++) {
 		printf("%2d ", y);
@@ -76,14 +104,18 @@ void print_board(char **board, int rows, int columns) {
 		printf("%2d ", x);
 		printf("|");
 		for(int y = 0; y < columns; y++) {
-			if(board[x][y + columns] == 'f') {
-				printf("%2c ", 'f');
-			} else if (board[x][y + columns] == 'n') {
-				printf("%2c ", '#');
-			} else if (board[x][y] == '0') {
-				printf("   ");
-			} else {
+			if (mode == 'r') {
 				printf("%2c ", board[x][y]);
+			} else {
+				if(board[x][y + columns] == 'f') {
+					printf("%2c ", 'f');
+				} else if (board[x][y + columns] == 'n') {
+					printf("%2c ", '#');
+				} else if (board[x][y] == '0') {
+					printf("   ");
+				} else {
+					printf("%2c ", board[x][y]);
+				}
 			}
 		}
 		printf("|");

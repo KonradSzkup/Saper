@@ -42,3 +42,13 @@ int reveal_cell(char **board, int rows, int columns,  int x, int y) {
 	return 0;
 }
 
+int is_game_won(char **board, int rows, int columns, int mines, int counter) {
+	for(int x = 0; x < rows; x++) {
+		for(int y = 0; y < columns; y++) {
+			if(board[x][y] != '*' && board[x][y + columns] == 'r')
+				counter++;
+		}
+	}
+	return counter;
+}
+
