@@ -6,6 +6,7 @@
 #include "game_logic.h"
 #include "game.h"
 #include "input.h"
+#include "leaderboard.h"
 
 int game() {
 	int rows;
@@ -48,6 +49,7 @@ int game() {
 
 	int i = 0;
 	int counter = 0;
+	char nick[25];
 
 	while(game_over != -1) {
 		system("clear");
