@@ -56,6 +56,9 @@ int read_from_file(char *filename) {
 			game_won = 1;
 			break;
 		}
+		if(feof(in))
+			game_over = -1;
+		game_won = 0;
 		
 	}
 	fclose(in);
