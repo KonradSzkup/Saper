@@ -1,5 +1,5 @@
-prog: board.o memory.o main.o game_logic.o input.o game.o read_from_file.o
-	cc board.o memory.o main.o game_logic.o input.o game.o read_from_file.o
+saper: board.o memory.o main.o game_logic.o input.o game.o read_from_file.o
+	cc board.o memory.o main.o game_logic.o input.o game.o read_from_file.o -o saper
 
 board.o: board.c
 	cc -c board.c

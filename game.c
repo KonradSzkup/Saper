@@ -14,32 +14,9 @@ int game() {
 	int mines;
 	int multiplier;
 	char option;
-	printf("Podaj stopien trudnosci gry, opcje: '1' - latwy 9x9 10min, '2' - sredni 16x16 40min, '3' - trudny 16x30 99min, '4' - wlasny\n");
-	printf("> ");
-	scanf(" %c", &option);
-	if(option == '1') {
-		rows = 9;
-        	columns = 9;
-        	mines = 10;
-		multiplier = 1;
-	} else if(option == '2') {
-		rows = 16;
-        	columns = 16;
-        	mines = 40;
-		multiplier = 2;
-	} else if(option == '3') {
-		rows = 16;
-        	columns = 30;
-        	mines = 99;
-		multiplier = 3;
-	} else if(option == '4') {
-		printf("Podaj wymiray i liczbe min w formacie 'liczba wierszy' 'liczba kolumn' 'liczba min'\n");
-		printf("> ");
-		scanf(" %d %d %d", &rows, &columns, &mines);
-	} else {
-		printf("Nie udalo sie wczytac poziomu trudnosci lub niepoprawna opcja\n");
-		printf("Sprobuj jeszcze raz!\n");
-		return -1;
+	
+	while(get_game_mode(&rows, &columns, &mines, &multiplier, &option) != 0) {
+		continue;
 	}
 
 	char **board = allocate_board(rows, columns);
