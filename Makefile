@@ -1,5 +1,5 @@
-saper: board.o memory.o main.o game_logic.o input.o game.o read_from_file.o
-	cc board.o memory.o main.o game_logic.o input.o game.o read_from_file.o -o saper
+saper: board.o memory.o main.o game_logic.o input.o game.o read_from_file.o leaderboard.o
+	cc board.o memory.o main.o game_logic.o input.o game.o leaderboard.o read_from_file.o -o saper
 
 board.o: board.c
 	cc -c board.c
@@ -21,3 +21,6 @@ game.o: game.c
 
 read_from_file.o: read_from_file.c
 	cc -c read_from_file.c
+
+leaderboard.o: leaderboard.c
+	cc -c leaderboard.c

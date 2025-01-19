@@ -26,7 +26,7 @@ int game() {
 
 	int i = 0;
 	int counter = 0;
-	char nick[25];
+	char nick[50];
 
 	while(game_over != -1) {
 		system("clear");
@@ -65,6 +65,10 @@ int game() {
 			system("clear");
 			printf("Wygrales\n");
 			printf("Twoj wynik to %d\n", counter*multiplier);
+			printf("Podaj swoj nick: ");
+			scanf("%49s", nick);
+			add_to_leaderboard(counter*multiplier, nick, "leaderboard.txt");
+			print_leaderboard("leaderboard.txt");
 			printf("Oto odkryta planasza\n");
 			print_board(board, rows, columns, 'r');
 			break;
@@ -74,6 +78,10 @@ int game() {
 			system("clear");
 			printf("Przegrales\n");
 			printf("Twoj wynik to %d\n", counter*multiplier);
+			printf("Podaj swoj nick: ");
+                        scanf("%49s", nick);
+			add_to_leaderboard(counter*multiplier, nick, "leaderboard.txt");
+                        print_leaderboard("leaderboard.txt");
 			printf("Odkryta plansza\n");
 			print_board(board, rows, columns, 'r');
 		}
